@@ -1,4 +1,4 @@
-# 📚 Izkur – Israeli Legal Citation Parser
+# ❛❛❞ Izkur – Israeli Legal Citation Parser
 
 **Izkur** (אִזְכּוּר, "citation" in Hebrew) is a Python library for parsing, analyzing, and generating structured representations of Israeli legal citations. It follows the 3rd edition of the official guide _"כללי האזכור האחיד בכתיבה המשפטית"_ and is built with compiler-inspired components for clarity, maintainability, and correctness.
 
@@ -12,8 +12,6 @@
 - 🧩 Use compiler techniques: lexical analysis, parsing, semantic analysis.
 - 🧰 Provide extensible Symbol Table and Error Handling infrastructure.
 
----
-
 ## 🧱 Architecture Overview
 
 | Phase                | Component                | Description                                   |
@@ -23,8 +21,6 @@
 | Semantic Analysis    | `symbols/`, `errors/`     | Validates structure, resolves entities.       |
 | Code Generation      | `__str__`, `to_json`      | Converts back to citation or structured data. |
 
----
-
 ## 📁 Directory Layout
 
 ```shell
@@ -33,16 +29,26 @@ izkur/
 ├── parser/             # Syntax analysis: grammar and AST generation
 ├── symbols/            # Symbol tables for cases, laws, etc.
 ├── errors/             # Centralized error reporting & recovery
-├── types/              # Core domain models (e.g., Case, Legislation)
+├── models/             # Core domain models (e.g., Case, Legislation)
 ├── cli/                # Command-line interface (using Typer)
+├── api/                # API
+├── config/             # Configuration
 ├── tests/              # Unit and integration tests
 └── init.py
 ```
 
 ## 📦 Installation
 
+via `pip`:
+
 ```bash
 pip install izkur
+```
+
+Or if you prefer using `uv`:
+
+```bash
+uv add izkur
 ```
 
 (Or clone the repo and use uv or hatch if you're developing.)

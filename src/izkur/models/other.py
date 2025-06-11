@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""izkur/__init__.py"""
+"""izkur/citations/other.py"""
 
 __version__ = "0.2.0"
 __date__ = "2025-06-11"

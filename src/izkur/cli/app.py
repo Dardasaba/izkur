@@ -1,27 +1,57 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""izkur/cli.py"""
+"""izkur/cli/app.py"""
 
-__version__ = "0.1.0"
-__date__ = "2025-06-10"
+__version__ = "0.2.0"
+__date__ = "2025-06-11"
 __author__ = r"Dardasaba <almatsuy@gmail.com>"
 
 import sys
+import inspect
+import asyncio
 
+from typing import Any, Callable, cast, TypeVar
+from functools import wraps, partial
 from pathlib import Path
-from babel import Locale
 from loguru import logger
-from rich.console import Console
+from typer import Typer
+from typer.models import CommandFunctionType
 
-from izkur import LOGS, AsyncTyper, echo_header, echo_success
+from ..config import LOGS
+from .utils import echo_header, echo_success
 
-locale = Locale("he", "IL")
-locale.territories["IL"]
+__all__ = ["AsyncTyper", "init_logging"]
+
+T = TypeVar("T")
+
+
+class AsyncTyper(Typer):
+    @staticmethod
+    def maybe_run_async(
+        decorator: Callable[[CommandFunctionType], CommandFunctionType],
+        func: CommandFunctionType,
+    ) -> CommandFunctionType:
+        if inspect.iscoroutinefunction(func):
+
+            @wraps(func)
+            def runner(*args: Any, **kwargs: Any) -> Any:
+                return asyncio.run(func(*args, **kwargs))
+
+            decorator(cast(CommandFunctionType, runner))
+        else:
+            decorator(func)
+        return func
+
+    def callback(self, *args: Any, **kwargs: Any) -> Any:
+        decorator = super().callback(*args, **kwargs)
+        return partial(self.maybe_run_async, decorator)
+
+    def command(self, *args: Any, **kwargs: Any) -> Any:
+        decorator = super().command(*args, **kwargs)
+        return partial(self.maybe_run_async, decorator)
+
 
 app = AsyncTyper()
-console = Console()
-if sys.platform == "win32":
-    console = Console(force_terminal=True, legacy_windows=True)
 
 
 @app.command("init-logging")
@@ -62,12 +92,3 @@ def init_logging():
         f"Logging initialized into individual level files at {logs_path.resolve()}",
     )
     echo_success("✅ Logging initialized.")
-
-
-@app.command("run-all")
-async def run_all():
-    init_logging()
-
-
-if __name__ == "__main__":
-    app()
