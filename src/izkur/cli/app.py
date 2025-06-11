@@ -17,8 +17,8 @@ from loguru import logger
 from typer import Typer
 from typer.models import CommandFunctionType
 
-from ..config import LOGS
-from .utils import echo_header, echo_success
+from izkur.config.config import LOGS
+from izkur.cli.utils import echo_header, echo_success
 
 __all__ = ["AsyncTyper", "init_logging"]
 

@@ -1,4 +1,4 @@
-# ❛❛❞ Izkur – Israeli Legal Citation Parser
+# ❝❞ Izkur – Israeli Legal Citation Parser
 
 **Izkur** (אִזְכּוּר, "citation" in Hebrew) is a Python library for parsing, analyzing, and generating structured representations of Israeli legal citations. It follows the 3rd edition of the official guide _"כללי האזכור האחיד בכתיבה המשפטית"_ and is built with compiler-inspired components for clarity, maintainability, and correctness.
 
