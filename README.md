@@ -120,6 +120,6 @@ MIT License © 2025 Dardasaba
 
 ## 📚 References
 
-- [כללי האזכור האחיד בכתיבה המשפטית, מהדורה שלישית](https://law.tau.ac.il/sites/law.tau.ac.il/files/media_server/law_heb/izkur/izkur2021pdf.pdf)
+- Specification: [כללי האזכור האחיד בכתיבה המשפטית, מהדורה שלישית](https://law.tau.ac.il/sites/law.tau.ac.il/files/media_server/law_heb/izkur/izkur2021pdf.pdf)
 - Python PEG Parser
 - Compiler Design Books
